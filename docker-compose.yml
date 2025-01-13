@@ -1,0 +1,39 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: finance-postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - finance-net
+
+  backend:
+    build: ./apps/backend
+    container_name: finance-backend
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/postgres
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+    networks:
+      - finance-net
+
+  frontend:
+    build: ./apps/frontend
+    container_name: finance-frontend
+    depends_on:
+      - backend
+    ports:
+      - "5173:80"
+    networks:
+      - finance-net
+
+networks:
+  finance-net:
+    driver: bridge

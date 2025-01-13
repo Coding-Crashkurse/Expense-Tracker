@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "financeapp"
+version = "0.1.0"
+description = "Demo Finanztracker"
+authors = ["Dein Name <email@example.com>"]
+readme = "README.md"
+packages = [{ include = "app" }]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.95.0"
+uvicorn = "^0.22.0"
+python-jose = "^3.3.0"
+passlib = "^1.7.4"
+sqlalchemy = "^2.0.0"
+psycopg2-binary = "^2.9.0"
+pydantic = "^1.10.0"
+python-multipart = "^0.0.20"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.9.1"
+pytest = "^7.0"
+
+[build-system]
+requires = ["poetry-core>=1.1.0"]
+build-backend = "poetry.core.masonry.api"
